@@ -1,21 +1,33 @@
 <template>
-    <q-table title="Cardápios da Semana" :rows="rows" :columns="Columns" row-key="day" class="q-ma-lg"
-        :pagination="initialPagination" />
 
-    <Cardapio_card />
-    <Bebidas_card />
+    <div style="display: flex;">
+        <q-table title="Cardápios da Semana" :rows="rows" :columns="Columns" row-key="day" class="q-ma-lg"
+            :pagination="initialPagination" style="width: 50%;" />
+
+        <Cardapio_card />
+    </div>
+
+    <div style="display: flex;">
+        <Bebidas_card />
+        <Sizes_card />
+    </div>
+
+
+
 </template>
 
 <script>
 import { getMenus, getSpecificMenu } from '../boot/menuServices'
 import Cardapio_card from './Cardapio_card.vue'
 import Bebidas_card from './Bebidas_card.vue'
+import Sizes_card from './Sizes_card.vue'
 
 export default {
     name: 'Menus_grid',
     components: {
         Cardapio_card,
-        Bebidas_card
+        Bebidas_card,
+        Sizes_card
     },
     setup() {
         return {
@@ -44,10 +56,6 @@ export default {
             for (var i = 0; i < this.rows.length; i++) {
                 this.rows[i].menu_of_day = this.rows[i].menu_of_day.join(", ")
             }
-        },
-        async getMenu(id) {
-            const response = await getSpecificMenu(id)
-            console.log(response)
         }
     },
     created() {

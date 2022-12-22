@@ -1,7 +1,7 @@
 <template>
-    <q-card style="max-width: 50%;" class="q-ma-lg">
+    <q-card style="width: 50%;" class="q-ma-lg">
         <q-table title="Bebidas" :rows="rows" :columns="columns" row-key="id" v-model:selected="selected"
-            selection="single" />
+            selection="single" :pagination="initialPagination" />
 
         <div class="input-group">
             <q-input class="q-pa-md" standout="bg-red text-white" style="width:50%;" label="Bebida"
@@ -10,18 +10,11 @@
                 v-model="newDrink.value" />
         </div>
 
-
         <div class=" row" style="display: flex; justify-content: center;">
             <q-btn color="red-8" class="q-ma-lg" style="width: 120px" @click="deleteDrink()">EXCLUIR</q-btn>
             <q-btn color="green-8" class="q-ma-lg" style="width: 120px" @click="saveNewDrinks()">SALVAR</q-btn>
-
         </div>
     </q-card>
-    <strong>newDrink:</strong> {{ newDrink }}
-    <br><br>
-    <strong>selected:</strong> {{ selected }}
-    <br><br>
-    <strong>rows:</strong> {{ rows }}
 </template>
 
 <script>
@@ -41,24 +34,28 @@ export default {
                 { name: 'Valor', label: 'Valor', align: 'left', field: row => row.value, format: val => `${val}` }
             ],
             rows,
-            selected
+            selected,
+            initialPagination: {
+                sortBy: 'desc',
+                descending: false,
+                page: 1,
+                rowsPerPage: 3
+            }
         }
     },
     data() {
-
         return {
             newDrink: {
                 id: null,
                 name: "",
                 value: ""
-            },
-
+            }
         }
     },
     methods: {
         async getAllDrinks() {
-            const response = await getDrinks()
-            this.rows = response.data
+            const response = await getDrinks();
+            this.rows = response.data;
         },
         saveNewDrinks() {
             if (this.newDrink.name.length < 1) {
@@ -86,11 +83,10 @@ export default {
             if (this.newDrink.id != null) {
                 deleteDrinks(this.newDrink.id)
                 alert("Bebida excluída com sucesso!");
-                this.getAllDrinks()
+                location.reload()
             } else {
                 alert("Escolha uma bebida para excluir.")
             }
-
         }
     },
     mounted() {

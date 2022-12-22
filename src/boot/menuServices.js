@@ -19,3 +19,13 @@ export const updateDrink = (id, data) => api.put(`/drinks/${id}`, data, {
 });
 export const getDrinks = () => api.get('/drinks');
 export const deleteDrinks = (id) => api.delete(`/drinks/${id}`);
+
+//-----------------------------------------------------------------------------------
+export const createSize = (data) => api.post('/sizes', data);
+export const updateSize = (id, data) => api.put(`/sizes/${id}`, data, {
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+export const getSizes = () => api.get('/sizes');
+export const deleteSizes = (id) => api.delete(`/sizes/${id}`);

@@ -1,5 +1,5 @@
 <template>
-    <q-card class="q-ma-lg">
+    <q-card class="q-ma-lg" style="width: 50%;">
         <div class="row">
             <div class="q-pa-lg text-h6">
                 Guarnições
@@ -17,12 +17,12 @@
             </div>
         </div>
 
-        <div class="row">
-            <q-input v-for="item in guarnições_form" :key="item.id" class="q-pa-md" standout="bg-red text-white"
-                :label="`Guarnição ${item.id}`" style="width: 230px;" v-model="item.food" />
+        <div class="row" style="justify-content: center;">
+            <q-input v-for="item in guarnições_form" :key="item.id" class="q-pa-lg" standout="bg-red text-white"
+                :label="`Guarnição ${item.id}`" style="width: 200px;" v-model="item.food" />
         </div>
 
-        <div class="row" style="display: flex; justify-content: center;">
+        <div class="row q-mt-lg" style="display: flex; justify-content: center;">
             <q-btn color="green-8" class="q-ma-lg text-h6" style="width: 120px" @click="saveNewMenu()">SALVAR</q-btn>
         </div>
     </q-card>
