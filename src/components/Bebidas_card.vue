@@ -12,9 +12,8 @@
 
 
         <div class=" row" style="display: flex; justify-content: center;">
-            <q-btn color="blue-8" class="q-ma-lg" style="width: 100px" @click="addDrink()">ADICIONAR</q-btn>
-            <q-btn color="red-8" class="q-ma-lg" style="width: 100px" @click="deleteDrink()">EXCLUIR</q-btn>
-            <q-btn color="green-8" class="q-ma-lg" style="width: 100px" @click="saveNewDrinks()">SALVAR</q-btn>
+            <q-btn color="red-8" class="q-ma-lg" style="width: 120px" @click="deleteDrink()">EXCLUIR</q-btn>
+            <q-btn color="green-8" class="q-ma-lg" style="width: 120px" @click="saveNewDrinks()">SALVAR</q-btn>
 
         </div>
     </q-card>
@@ -26,9 +25,8 @@
 </template>
 
 <script>
-import { getDrinks, deleteDrinks } from '../boot/menuServices'
+import { createDrink, updateDrink, getDrinks, deleteDrinks } from '../boot/menuServices'
 import { ref } from 'vue'
-
 
 export default {
     name: 'Bebidas_card',
@@ -66,26 +64,33 @@ export default {
             if (this.newDrink.name.length < 1) {
                 alert("Por favor, dê o nome da bebida");
             } else if (this.newDrink.name.length > 50) {
-                alert("O nome da bebida é muito grande, diminua");
+                alert("Diminua o tamanho do nome da bebida");
+            } else if (this.newDrink.value == "") {
+                alert("Coloque um valor para a bebida")
             } else {
-                const data = JSON.stringify(this.newDrink)
-                console.log(data)
+                if (this.newDrink.id == null || !this.newDrink.id) {
+
+                    this.newDrink.id = null
+                    createDrink(this.newDrink);
+                    alert('Bebida criada com sucesso!');
+                    this.getAllDrinks()
+
+                } else {
+                    updateDrink(this.newDrink.id, this.newDrink);
+                    alert('Bebida atualizada com sucesso!')
+                    this.getAllDrinks()
+                }
             }
         },
         deleteDrink() {
             if (this.newDrink.id != null) {
                 deleteDrinks(this.newDrink.id)
                 alert("Bebida excluída com sucesso!");
-                location.reload()
+                this.getAllDrinks()
             } else {
                 alert("Escolha uma bebida para excluir.")
             }
 
-        },
-        addDrink() {
-            this.newDrink.id = null
-            this.newDrink.name = ""
-            this.newDrink.value = ""
         }
     },
     mounted() {

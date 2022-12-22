@@ -11,6 +11,11 @@ export const updateMenu = (id, data) => api.put(`/menus/${id}`, data, {
 export const getSpecificMenu = (id) => api.get(`/menus/${id}`);
 
 //-----------------------------------------------------------------------------------
+export const createDrink = (data) => api.post('/drinks', data);
+export const updateDrink = (id, data) => api.put(`/drinks/${id}`, data, {
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
 export const getDrinks = () => api.get('/drinks');
-
 export const deleteDrinks = (id) => api.delete(`/drinks/${id}`);
