@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Instalando dependências
-        uses: actions/setup-node@v3
         with:
           node-version: 16
         run:
