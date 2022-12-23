@@ -1,0 +1,10 @@
+name: MarmitechCICD
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Quasar
+        run: quasar build
