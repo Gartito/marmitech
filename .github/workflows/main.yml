@@ -1,10 +1,13 @@
 name: MarmitechCICD
-on:
+on: [push]
   workflow_dispatch:
   
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Build Quasar
-        run: quasar build
+- name: Install dependencies
+  uses: actions/npm@v2
+  with:
+    args: install
+
+- name: Build project
+  uses: actions/npm@v2
+  with:
+    args: quasar build
