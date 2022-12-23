@@ -11,10 +11,13 @@ jobs:
       - name: Checkout do repositório
         uses: actions/checkout@v1
       - name: Instalando dependências
-        uses: actions/npm@v2
+        uses: actions/setup-node@v3
         with:
-          args: install
+          node-version: 16
+      - run: npm install
+      
       - name: Build do projeto
-        uses: actions/npm@v2
+        uses: actions/setup-node@v3
         with:
-          args: quasar build
+          node-version: 16
+        - run: quasar build
