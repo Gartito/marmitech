@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-
+      
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,9 +14,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm install   
+        run: npm install   
       - name: Build do projeto
         uses: actions/setup-node@v3
         with:
           node-version: 16
-        - run: quasar build
+        run: quasar build
