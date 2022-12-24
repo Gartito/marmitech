@@ -64,7 +64,7 @@ export default {
       for (var i = 0; i < this.rows.length; i++) {
         this.rows[i].menu_of_day = this.rows[i].menu_of_day.join(", ");
       }
-      alert(process.env.ENV_VAR_TESTE)
+      console.log(process.env.ENV_VAR_TESTE)
     },
   },
   created() {
