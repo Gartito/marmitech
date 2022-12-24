@@ -8,9 +8,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v1
       - name: Instalando dependências
+        uses: actions/setup-node@v3
         with:
           node-version: 16
-        run:
-          npm install
-          quasar build
