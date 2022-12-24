@@ -1,7 +1,14 @@
 <template>
   <div style="display: flex">
-    <q-table title="Cardápios da Semana" :rows="rows" :columns="Columns" row-key="day" class="q-ma-lg"
-      :pagination="initialPagination" style="width: 50%" />
+    <q-table
+      title="Cardápios da Semana"
+      :rows="rows"
+      :columns="Columns"
+      row-key="day"
+      class="q-ma-lg"
+      :pagination="initialPagination"
+      style="width: 50%"
+    />
 
     <Cardapio_card />
   </div>
@@ -64,7 +71,6 @@ export default {
       for (var i = 0; i < this.rows.length; i++) {
         this.rows[i].menu_of_day = this.rows[i].menu_of_day.join(", ");
       }
-      alert(process.env.TESTE);
     },
   },
   created() {
@@ -73,6 +79,4 @@ export default {
 };
 </script>
 
-<style>
-
-</style>
+<style></style>
