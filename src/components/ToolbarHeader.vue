@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-toolbar class="bg-blue-10 text-white q-my-md shadow-2" id="toolbarHeader">
+    <q-toolbar class="bg-red-10 text-white q-my-md shadow-2" id="toolbarHeader">
       <p class="text-h2 text-weight-bolder">MARMITECH</p>
       <p class="text-weight-bold text-h5 q-pl-lg q-mt-lg">
         Livorno Restaurante
