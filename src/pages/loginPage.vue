@@ -21,16 +21,6 @@
             <q-btn outline color="primary" label="esqueci minha senha" />
         </q-card-section>
     </q-card>
-
-    {{ username }}
-    <br><br>
-    <br><br>
-    {{ password }}
-    <br><br>
-    {{ isPwd }}
-    <br><br>
-    {{ token }}
-
 </template>
 
 <script>
@@ -62,7 +52,7 @@ export default {
             try {
                 const response = await getJWT(data)
                 this.token = response.data
-                localStorage.setItem('jwt_token', this.token)
+                localStorage.setItem('jwt_token_marmitech_session', this.token)
                 this.$router.replace('/cardapio')
             } catch (e) {
                 console.log(e)
