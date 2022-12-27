@@ -22,7 +22,7 @@ export default {
 
       options: [
         { label: "Cardápio", value: "cardapio", href: "/cardapio" },
-        { label: "Sair", value: "sair", href: "/sair" },
+        { label: "Sair", value: "sair", href: "/logout" },
       ],
     };
   },
