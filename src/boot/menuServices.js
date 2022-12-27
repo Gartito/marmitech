@@ -27,8 +27,15 @@ export const createSize = (data) => api.post("/sizes", data);
 export const updateSize = (id, data) =>
   api.put(`/sizes/${id}`, data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
   });
 export const getSizes = () => api.get("/sizes");
 export const deleteSizes = (id) => api.delete(`/sizes/${id}`);
+
+//-----------------------------------------------------------------------------------
+export const getJWT = (data) => api.post("/auth", data, {
+  headers: {
+    "Content-Type": "application/json"
+  }
+});
