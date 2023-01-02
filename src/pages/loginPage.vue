@@ -90,7 +90,7 @@ export default {
                 const response = await getJWT(data);
                 this.token = response.data;
                 localStorage.setItem('jwt_token_marmitech_session', this.token);
-                this.$router.replace('/cardapio');
+                this.$router.replace('/');
             } catch (e) {
                 console.log(e)
                 this.showErrorLogin = true;
