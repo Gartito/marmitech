@@ -1,14 +1,14 @@
 <template>
   <div style="display: flex">
     <q-table title="Cardápios da Semana" :rows="rows" :columns="Columns" row-key="day" class="q-ma-lg"
-      :pagination="initialPagination" style="width: 50%" />
+      :pagination="initialPagination" style="width: 70%" />
 
-    <Cardapio_card />
+    <Sizes_card />
   </div>
 
   <div style="display: flex">
+    <Cardapio_card />
     <Bebidas_card />
-    <Sizes_card />
   </div>
 </template>
 
@@ -64,7 +64,6 @@ export default {
       for (var i = 0; i < this.rows.length; i++) {
         this.rows[i].menu_of_day = this.rows[i].menu_of_day.join(", ");
       }
-      console.log(process.env.ENV_VAR_TESTE)
     },
   },
   created() {
