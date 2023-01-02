@@ -21,7 +21,7 @@ export default {
       model: ref("cardapio"),
 
       options: [
-        { label: "Cardápio", value: "cardapio", href: "/cardapio" },
+        { label: "Cardápio", value: "cardapio", href: "/" },
         { label: "Sair", value: "sair", href: "/logout" },
       ],
     };

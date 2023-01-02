@@ -1,6 +1,6 @@
 const routes = [
     {
-        path: "/cardapio",
+        path: "/",
         component: () => import("pages/IndexPage.vue"),
         meta: { requiresAuth: true }
     },

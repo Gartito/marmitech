@@ -115,10 +115,8 @@ export default {
                 };
 
                 const data = JSON.stringify(newMenu);
-                console.log(data);
 
                 const response = await updateMenu(newMenu.id, data);
-                console.log(response);
 
                 location.reload();
             }

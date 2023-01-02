@@ -106,12 +106,12 @@ export default {
                     createDrink(this.newDrink);
                     this.msgError = "Bebida criada com sucesso!";
                     this.showError = true;
-                    this.getAllDrinks();
+                    location.reload();
                 } else {
                     updateDrink(this.newDrink.id, this.newDrink);
                     this.msgError = "Bebida atualizada com sucesso!";
                     this.showError = true;
-                    this.getAllDrinks();
+                    location.reload();
                 }
             }
         },

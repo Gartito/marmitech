@@ -99,12 +99,12 @@ export default {
                     createSize(this.newSize);
                     this.msgError = "Marmita criada com sucesso!";
                     this.showError = true;
-                    this.getAllSizes();
+                    location.reload();
                 } else {
                     updateSize(this.newSize.id, this.newSize);
                     this.msgError = "Marmita atualizada com sucesso!";
                     this.showError = true;
-                    this.getAllSizes();
+                    location.reload();
                 }
             }
         },
