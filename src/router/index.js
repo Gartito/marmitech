@@ -6,6 +6,7 @@ import {
     createWebHashHistory,
 } from "vue-router";
 import routes from "./routes";
+import * as jose from 'jose'
 
 /*
  * If not building with SSR mode, you can
@@ -35,11 +36,17 @@ export default route(function (/* { store, ssrContext } */) {
 
     Router.beforeEach((to, from, next) => {
         const token = localStorage.getItem('jwt_token_marmitech_session');
+
         if (to.matched.some(route => route.meta.requiresAuth)) {
             if (token == null) {
                 next('/login');
             } else {
-                next();
+                const decoded = jose.decodeJwt(token)
+                if (decoded.exp * 1000 < Date.now()) {
+                    next('/login');
+                } else {
+                    next();
+                }
             }
         } else {
             next();
