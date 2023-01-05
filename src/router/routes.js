@@ -21,6 +21,11 @@ const routes = [
         },
         meta: { requiresAuth: false }
     },
+    {
+        path: "/menu",
+        component: () => import("pages/CustomerView.vue"),
+        meta: { requiresAuth: false }
+    },
 
     // Always leave this as last one,
     // but you can also remove it
