@@ -1,5 +1,31 @@
 <template>
-    <q-card class="q-ma-lg" style="width: 70%">
+    <q-card v-if="isMobile" class="q-ma-sm">
+        <div class="row">
+            <div class="q-pa-md text-h6">Guarnições</div>
+
+            <div class="q-pa-md q-gutter-sm">
+                <q-select standout="bg-red text-white" v-model="dia" :options="options" option-value="id"
+                    option-label="name" label="Dia da Semana" style="width: 200px" />
+            </div>
+
+            <div class="q-pa-md text-center" style="width: 100%">
+                <q-btn class="q-ma-md" color="red" style="width: 23%" @click="handleInputs(0)">menos</q-btn>
+                <q-btn class="q-ma-md" color="green" style="width: 23%" @click="handleInputs(1)">mais</q-btn>
+                <q-btn class="q-ma-md" color="blue" style="width: 23%" @click="handleInputs(2)">limpar</q-btn>
+            </div>
+        </div>
+
+        <div class="row" style="justify-content: center">
+            <q-input v-for="item in guarnições_form" :key="item.id" class="q-pa-lg" standout="bg-red text-white"
+                :label="`Guarnição ${item.id}`" style="width: 100%" v-model="item.food" />
+        </div>
+
+        <div class="row" style="display: flex; justify-content: center">
+            <q-btn color="green-8" class="q-ma-lg text-h6" style="width: 120px" @click="saveNewMenu()">SALVAR</q-btn>
+        </div>
+    </q-card>
+
+    <q-card v-else class="q-ma-lg" style="width: 70%">
         <div class="row">
             <div class="q-pa-lg text-h6">Guarnições</div>
 
@@ -60,7 +86,8 @@ export default {
             ],
             dia: null,
             showError: false,
-            msgError: ""
+            msgError: "",
+            isMobile: false
         };
     },
     methods: {
@@ -121,6 +148,9 @@ export default {
                 location.reload();
             }
         },
+        checkWindowSize() {
+            this.isMobile = window.innerWidth < 600
+        }
     },
     mounted() {
         //Projetando 8 guarnições por default na tela
@@ -131,6 +161,8 @@ export default {
             };
             this.guarnições_form.push(model);
         }
+        this.checkWindowSize()
+        window.addEventListener('resize', this.checkWindowSize)
     },
 };
 </script>

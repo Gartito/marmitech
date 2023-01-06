@@ -1,5 +1,27 @@
 <template>
-    <q-card id="card">
+    <q-card v-if="isMobile" class="q-ma-sm" style="margin-top: 40%">
+        <q-card-section>
+            <div class="text-h4 text-red-10 text-bold">MARMITECH</div>
+        </q-card-section>
+
+        <q-card-section>
+            <q-input class="q-mb-xl" filled v-model="username" label="Usuário"
+                hint="Digite aqui seu usuário (ex: user@gmail.com)" />
+            <q-input v-model="password" filled :type="isPwd ? 'password' : 'text'" label="Senha">
+                <template v-slot:append>
+                    <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer"
+                        @click="isPwd = !isPwd" />
+                </template>
+            </q-input>
+            <q-btn flat color="primary" label="Esqueci minha senha" @click="showDialog = true" />
+        </q-card-section>
+
+        <q-card-section style="  display: flex; justify-content: center; align-items: center;">
+            <q-btn color="secondary" label="ENTRAR" class="text-h6 q-mr-lg" @click="login" />
+        </q-card-section>
+    </q-card>
+
+    <q-card v-else style="width: 25%; margin: 10% auto; display: block;">
         <q-card-section>
             <div class="text-h4 text-red-10 text-bold">MARMITECH</div>
         </q-card-section>
@@ -77,7 +99,8 @@ export default {
         return {
             token: null,
             showDialog: false,
-            showErrorLogin: false
+            showErrorLogin: false,
+            isMobile: false
         }
     },
     methods: {
@@ -95,24 +118,14 @@ export default {
                 console.log(e)
                 this.showErrorLogin = true;
             }
-
-
-
-            //this.token = response.data
+        },
+        checkWindowSize() {
+            this.isMobile = window.innerWidth < 600
         }
+    },
+    mounted() {
+        this.checkWindowSize();
+        window.addEventListener('resize', this.checkWindowSize);
     }
 }
 </script>
-
-<style>
-#card {
-    width: 25%;
-    margin: 10% auto;
-    display: block;
-}
-
-#password-style {
-    text-decoration: none;
-
-}
-</style>
