@@ -1,5 +1,5 @@
 <template>
-    <q-card style="width: 30%" class="q-ma-lg">
+    <q-card v-if="isMobile" class="q-ma-sm">
         <q-table title="Bebidas" :rows="rows" :columns="columns" row-key="id" v-model:selected="selected"
             selection="single" :pagination="initialPagination" />
 
@@ -15,6 +15,25 @@
             <q-btn color="green-8" class="q-ma-lg" style="width: 120px" @click="saveNewDrinks()">SALVAR</q-btn>
         </div>
     </q-card>
+
+    <q-card v-else style="width: 30%" class="q-ma-lg">
+        <q-table title="Bebidas" :rows="rows" :columns="columns" row-key="id" v-model:selected="selected"
+            selection="single" :pagination="initialPagination" />
+
+        <div class="input-group">
+            <q-input class="q-pa-md" standout="bg-red text-white" style="width: 50%" label="Bebida"
+                v-model="newDrink.name" />
+            <q-input class="q-pa-md" standout="bg-red text-white" style="width: 50%" type="number" label="Valor"
+                v-model="newDrink.value" />
+        </div>
+
+        <div class="row" style="display: flex; justify-content: center">
+            <q-btn color="red-8" class="q-ma-lg" style="width: 120px" @click="deleteDrink()">EXCLUIR</q-btn>
+            <q-btn color="green-8" class="q-ma-lg" style="width: 120px" @click="saveNewDrinks()">SALVAR</q-btn>
+        </div>
+    </q-card>
+
+
     <q-dialog v-model="showError" title="Erro">
         <q-card>
             <q-card-section>
@@ -43,7 +62,6 @@ import { ref } from "vue";
 
 export default {
     name: "Bebidas_card",
-
     setup() {
         const rows = ref([]);
         const selected = ref([]);
@@ -82,7 +100,8 @@ export default {
                 value: "",
             },
             showError: false,
-            msgError: ""
+            msgError: "",
+            isMobile: false
         };
     },
     methods: {
@@ -126,9 +145,14 @@ export default {
                 this.showError = true;
             }
         },
+        checkWindowSize() {
+            this.isMobile = window.innerWidth < 600
+        }
     },
     mounted() {
         this.getAllDrinks();
+        this.checkWindowSize();
+        window.addEventListener('resize', this.checkWindowSize);
     },
     watch: {
         selected(newValue) {

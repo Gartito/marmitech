@@ -1,5 +1,5 @@
 <template>
-    <q-card style="width: 30%" class="q-ma-lg">
+    <q-card v-if="isMobile" class="q-ma-sm">
         <q-table title="Marmitas" :rows="rows" :columns="columns" row-key="id" v-model:selected="selected"
             selection="single" />
 
@@ -15,6 +15,25 @@
             <q-btn color="green-8" class="q-ma-lg" style="width: 120px" @click="saveNewSizes()">SALVAR</q-btn>
         </div>
     </q-card>
+
+    <q-card v-else style="width: 30%" class="q-ma-lg">
+        <q-table title="Marmitas" :rows="rows" :columns="columns" row-key="id" v-model:selected="selected"
+            selection="single" />
+
+        <div class="input-group">
+            <q-input class="q-pa-md" standout="bg-red text-white" style="width: 50%" label="Marmita"
+                v-model="newSize.name" />
+            <q-input class="q-pa-md" standout="bg-red text-white" style="width: 50%" type="number" label="Valor"
+                v-model="newSize.value" />
+        </div>
+
+        <div class="row" style="display: flex; justify-content: center">
+            <q-btn color="red-8" class="q-ma-lg" style="width: 120px" @click="deleteSize()">EXCLUIR</q-btn>
+            <q-btn color="green-8" class="q-ma-lg" style="width: 120px" @click="saveNewSizes()">SALVAR</q-btn>
+        </div>
+    </q-card>
+
+
     <q-dialog v-model="showError" title="Erro">
         <q-card>
             <q-card-section>
@@ -75,7 +94,8 @@ export default {
                 value: "",
             },
             showError: false,
-            msgError: ""
+            msgError: "",
+            isMobile: false
         };
     },
     methods: {
@@ -119,9 +139,14 @@ export default {
                 this.showError = true;
             }
         },
+        checkWindowSize() {
+            this.isMobile = window.innerWidth < 600
+        }
     },
     mounted() {
         this.getAllSizes();
+        this.checkWindowSize();
+        window.addEventListener('resize', this.checkWindowSize);
     },
     watch: {
         selected(newValue) {

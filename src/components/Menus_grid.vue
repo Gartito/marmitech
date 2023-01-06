@@ -1,14 +1,26 @@
 <template>
-  <div style="display: flex">
-    <q-table title="Cardápios da Semana" :rows="rows" :columns="Columns" row-key="day" class="q-ma-lg"
-      :pagination="initialPagination" style="width: 70%" />
+  <div v-if="isMobile">
 
+    <q-table title="Cardápios da Semana" :rows="rows" :columns="Columns" row-key="day" class="q-ma-sm"
+      :pagination="initialPagination" />
+    <Cardapio_card />
     <Sizes_card />
+    <Bebidas_card />
+
   </div>
 
-  <div style="display: flex">
-    <Cardapio_card />
-    <Bebidas_card />
+  <div v-else>
+    <div style="display: flex">
+      <q-table title="Cardápios da Semana" :rows="rows" :columns="Columns" row-key="day" class="q-ma-lg"
+        :pagination="initialPagination" style="width: 70%" />
+
+      <Sizes_card />
+    </div>
+
+    <div style="display: flex">
+      <Cardapio_card />
+      <Bebidas_card />
+    </div>
   </div>
 </template>
 
@@ -54,6 +66,7 @@ export default {
   data() {
     return {
       rows: [],
+      isMobile: false
     };
   },
   methods: {
@@ -65,13 +78,16 @@ export default {
         this.rows[i].menu_of_day = this.rows[i].menu_of_day.join(", ");
       }
     },
+    checkWindowSize() {
+      this.isMobile = window.innerWidth < 600
+    }
   },
   created() {
     this.getAllMenus();
   },
+  mounted() {
+    this.checkWindowSize()
+    window.addEventListener('resize', this.checkWindowSize)
+  }
 };
 </script>
-
-<style>
-
-</style>
