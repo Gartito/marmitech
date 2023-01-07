@@ -87,7 +87,8 @@ export default {
             dia: null,
             showError: false,
             msgError: "",
-            isMobile: false
+            isMobile: false,
+            restaurant: null
         };
     },
     methods: {
@@ -139,6 +140,7 @@ export default {
                     id: this.dia.id,
                     day: this.dia.name,
                     menu_of_day: string_foods || "",
+                    restaurant: this.restaurant
                 };
 
                 const data = JSON.stringify(newMenu);
@@ -153,6 +155,9 @@ export default {
         }
     },
     mounted() {
+        const jwt = localStorage.getItem('jwt_token_marmitech_session');
+        const jwtDecoded = JSON.parse(atob(jwt.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+        this.restaurant = jwtDecoded.name;
         //Projetando 8 guarnições por default na tela
         for (let i = 1; i <= 8; i++) {
             let model = {

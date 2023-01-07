@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { getMenus, getSpecificMenu } from "../boot/menuServices";
+import { getMenus } from "../boot/menuServices";
 import Cardapio_card from "./Cardapio_card.vue";
 import Bebidas_card from "./Bebidas_card.vue";
 import Sizes_card from "./Sizes_card.vue";
@@ -66,12 +66,14 @@ export default {
   data() {
     return {
       rows: [],
-      isMobile: false
+      isMobile: false,
+      restaurant: null
     };
   },
   methods: {
     async getAllMenus() {
-      const response = await getMenus();
+
+      const response = await getMenus(this.restaurant);
       this.rows = await response.data;
 
       for (var i = 0; i < this.rows.length; i++) {
@@ -83,11 +85,14 @@ export default {
     }
   },
   created() {
+    const jwt = localStorage.getItem('jwt_token_marmitech_session');
+    const jwtDecoded = JSON.parse(atob(jwt.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+    this.restaurant = jwtDecoded.name;
     this.getAllMenus();
   },
   mounted() {
-    this.checkWindowSize()
-    window.addEventListener('resize', this.checkWindowSize)
+    this.checkWindowSize();
+    window.addEventListener('resize', this.checkWindowSize);
   }
 };
 </script>
