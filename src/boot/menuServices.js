@@ -2,22 +2,19 @@ import axios from "axios";
 import { api } from "./axios.js";
 
 
-/* refeito */ export const getMenus = (restaurant) => api.get(`/menus/restaurants/${restaurant}`);
+/* refeito */ export const getMenus = (restaurant) => api.get(`/menus/${restaurant}`);
 /* refeito */ export const updateMenu = (id, data) =>
   api.put(`/menus/${id}`, data, {
     headers: {
       "Content-Type": "application/json",
     },
   });
-/* refeito */ export const getSpecificMenu = (id, restaurant) => api.get(`/menus/restaurants/${restaurant}/${id}`);
+/* refeito */ export const getSpecificMenu = (id, restaurant) => api.get(`/menus/${restaurant}/${id}`);
+
 //-----------------------------------------------------------------------------------
-export const createDrink = (data) => api.post("/drinks", data);
-export const updateDrink = (id, data) =>
-  api.put(`/drinks/${id}`, data, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+
+/* refeito */ export const createDrink = (restaurant, data) => api.post(`/drinks/${restaurant}`, data);
+/* refeito */ export const updateDrink = (restaurant, data) => api.put(`/drinks/${restaurant}`, data);
 export const getDrinks = () => api.get("/drinks");
 export const deleteDrinks = (id) => api.delete(`/drinks/${id}`);
 

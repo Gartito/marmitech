@@ -41,7 +41,7 @@
             </q-card-section>
 
             <q-card-section class="q-pt-none">
-                {{ msgError }}
+                {{ msg }}
             </q-card-section>
 
             <q-card-actions align="right">
@@ -97,11 +97,12 @@ export default {
             newDrink: {
                 id: null,
                 name: "",
-                value: "",
+                value: ""
             },
             showError: false,
-            msgError: "",
-            isMobile: false
+            msg: "",
+            isMobile: false,
+            restaurant: null
         };
     },
     methods: {
@@ -111,24 +112,24 @@ export default {
         },
         saveNewDrinks() {
             if (this.newDrink.name.length < 1) {
-                this.msgError = "Por favor, dê um nome para a bebida";
+                this.msg = "Por favor, dê um nome para a bebida";
                 this.showError = true;
             } else if (this.newDrink.name.length > 50) {
-                this.msgError = "Por favor, diminua o tamanho do nome da bebida";
+                this.msg = "Por favor, diminua o tamanho do nome da bebida";
                 this.showError = true;
             } else if (this.newDrink.value == "") {
-                this.msgError = "Por favor, coloque o preço da bebida";
+                this.msg = "Por favor, coloque o preço da bebida";
                 this.showError = true;
             } else {
                 if (this.newDrink.id == null || !this.newDrink.id) {
                     this.newDrink.id = null;
-                    createDrink(this.newDrink);
-                    this.msgError = "Bebida criada com sucesso!";
+                    createDrink(this.restaurant, this.newDrink);
+                    this.msg = "Bebida criada com sucesso!";
                     this.showError = true;
                     location.reload();
                 } else {
-                    updateDrink(this.newDrink.id, this.newDrink);
-                    this.msgError = "Bebida atualizada com sucesso!";
+                    updateDrink(this.restaurant, this.newDrink);
+                    this.msg = "Bebida atualizada com sucesso!";
                     this.showError = true;
                     location.reload();
                 }
@@ -137,11 +138,11 @@ export default {
         deleteDrink() {
             if (this.newDrink.id != null) {
                 deleteDrinks(this.newDrink.id);
-                this.msgError = "Bebida excluída com sucesso!";
+                this.msg = "Bebida excluída com sucesso!";
                 this.showError = true;
                 location.reload();
             } else {
-                this.msgError = "Escolha uma bebida para atualizar";
+                this.msg = "Escolha uma bebida para atualizar";
                 this.showError = true;
             }
         },
@@ -150,6 +151,9 @@ export default {
         }
     },
     mounted() {
+        const jwt = localStorage.getItem('jwt_token_marmitech_session');
+        const jwtDecoded = JSON.parse(atob(jwt.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+        this.restaurant = jwtDecoded.name;
         this.getAllDrinks();
         this.checkWindowSize();
         window.addEventListener('resize', this.checkWindowSize);
@@ -179,33 +183,3 @@ export default {
     /* adiciona um espaçamento de 10px entre os inputs */
 }
 </style>
-
-<!--
-            <template #body="props">
-                <q-tr :props="props">
-
-                    <q-td key="id" :props="props">
-                        {{ props.row.id }}
-                    </q-td>
-
-                    <q-td key="name" :props="props">
-                        {{ props.row.name }}
-                        <q-popup-edit v-slot="scope" v-model="props.row.name" label-cancel="fechar" label-set="salvar"
-                            buttons persistent>
-                            <q-input v-model="scope.value" dense autofocus hint="Use os botões para fechar" />
-                        </q-popup-edit>
-                    </q-td>
-
-                    <q-td key="value" :props="props">
-                        {{ props.row.value }}
-                        <q-popup-edit v-slot="scope" v-model="props.row.value" label-cancel="fechar" label-set="salvar"
-                            buttons persistent>
-                            <q-input v-model="scope.value" type="number" dense autofocus
-                                hint="Use os botões para fechar" />
-                        </q-popup-edit>
-                    </q-td>
-
-                </q-tr>
-            </template>
--->
->
