@@ -1,5 +1,5 @@
 <template>
-    <main class="bg-yellow-14 q-pa-sm">
+    <main class="bg-yellow-14 q-pa-sm" style="height: 100vh;">
         <q-card class="q-pa-sm q-ma-sm">
             <q-card-session>
                 <div class="text-h5 q-pl-md text-center text-bold">Cardápio de {{ dia }} do {{ restaurant }}</div>

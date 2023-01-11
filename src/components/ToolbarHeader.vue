@@ -2,7 +2,7 @@
   <header v-if="isMobile">
     <q-toolbar class="bg-red-10 text-white q-my-md shadow-2" id="toolbarHeader">
       <p class="text-weight-bold text-h6 q-pl-sm q-mt-sm">
-        Livorno Restaurante
+        {{ restaurant }} Restaurante
       </p>
       <q-space />
 
@@ -14,7 +14,7 @@
     <q-toolbar class="bg-red-10 text-white q-ma-md shadow-2" id="toolbarHeader">
       <p class="text-h2 text-weight-bolder">MARMITECH</p>
       <p class="text-weight-bold text-h5 q-pl-lg q-mt-lg">
-        Livorno Restaurante
+        {{ restaurant }} Restaurante
       </p>
       <q-space />
 
@@ -29,7 +29,8 @@ import { ref } from "vue";
 export default {
   data() {
     return {
-      isMobile: false
+      isMobile: false,
+      restaurant: null
     }
   },
   setup() {
@@ -48,6 +49,9 @@ export default {
     },
   },
   mounted() {
+    const jwt = localStorage.getItem('jwt_token_marmitech_session');
+    const jwtDecoded = JSON.parse(atob(jwt.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+    this.restaurant = jwtDecoded.name;
     this.checkWindowSize()
     window.addEventListener('resize', this.checkWindowSize)
   }
