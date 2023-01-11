@@ -95,13 +95,15 @@ export default {
             },
             showError: false,
             msgError: "",
-            isMobile: false
+            isMobile: false,
+            restaurant: null
         };
     },
     methods: {
         async getAllSizes() {
-            const response = await getSizes();
+            const response = await getSizes(this.restaurant);
             this.rows = response.data;
+            this.rows.sort((a, b) => a.value - b.value);
         },
         saveNewSizes() {
             if (this.newSize.name.length < 1) {
@@ -116,24 +118,30 @@ export default {
             } else {
                 if (this.newSize.id == null || !this.newSize.id) {
                     this.newSize.id = null;
-                    createSize(this.newSize);
+                    createSize(this.restaurant, this.newSize);
                     this.msgError = "Marmita criada com sucesso!";
                     this.showError = true;
-                    location.reload();
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
                 } else {
-                    updateSize(this.newSize.id, this.newSize);
+                    updateSize(this.restaurant, this.newSize);
                     this.msgError = "Marmita atualizada com sucesso!";
                     this.showError = true;
-                    location.reload();
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
                 }
             }
         },
         deleteSize() {
             if (this.newSize.id != null) {
-                deleteSizes(this.newSize.id);
+                deleteSizes(this.restaurant, this.newSize.id);
                 this.msgError = "Marmita excluída com sucesso!";
                 this.showError = true;
-                location.reload();
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
             } else {
                 this.msgError = "Escolha uma marmita para excluir";
                 this.showError = true;
@@ -144,6 +152,9 @@ export default {
         }
     },
     mounted() {
+        const jwt = localStorage.getItem('jwt_token_marmitech_session');
+        const jwtDecoded = JSON.parse(atob(jwt.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+        this.restaurant = jwtDecoded.name;
         this.getAllSizes();
         this.checkWindowSize();
         window.addEventListener('resize', this.checkWindowSize);

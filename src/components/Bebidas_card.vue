@@ -107,8 +107,9 @@ export default {
     },
     methods: {
         async getAllDrinks() {
-            const response = await getDrinks();
+            const response = await getDrinks(this.restaurant);
             this.rows = response.data;
+            this.rows.sort((a, b) => a.value - b.value);
         },
         saveNewDrinks() {
             if (this.newDrink.name.length < 1) {
@@ -126,21 +127,27 @@ export default {
                     createDrink(this.restaurant, this.newDrink);
                     this.msg = "Bebida criada com sucesso!";
                     this.showError = true;
-                    location.reload();
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
                 } else {
                     updateDrink(this.restaurant, this.newDrink);
                     this.msg = "Bebida atualizada com sucesso!";
                     this.showError = true;
-                    location.reload();
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
                 }
             }
         },
         deleteDrink() {
             if (this.newDrink.id != null) {
-                deleteDrinks(this.newDrink.id);
+                deleteDrinks(this.restaurant, this.newDrink.id);
                 this.msg = "Bebida excluída com sucesso!";
                 this.showError = true;
-                location.reload();
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
             } else {
                 this.msg = "Escolha uma bebida para atualizar";
                 this.showError = true;

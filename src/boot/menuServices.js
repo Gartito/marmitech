@@ -15,19 +15,14 @@ import { api } from "./axios.js";
 
 /* refeito */ export const createDrink = (restaurant, data) => api.post(`/drinks/${restaurant}`, data);
 /* refeito */ export const updateDrink = (restaurant, data) => api.put(`/drinks/${restaurant}`, data);
-export const getDrinks = () => api.get("/drinks");
-export const deleteDrinks = (id) => api.delete(`/drinks/${id}`);
+/* refeito */ export const getDrinks = (restaurant) => api.get(`/drinks/${restaurant}`);
+/* refeito */ export const deleteDrinks = (restaurant, id) => api.delete(`/drinks/${restaurant}/${id}`);
 
 //-----------------------------------------------------------------------------------
-export const createSize = (data) => api.post("/sizes", data);
-export const updateSize = (id, data) =>
-  api.put(`/sizes/${id}`, data, {
-    headers: {
-      "Content-Type": "application/json"
-    },
-  });
-export const getSizes = () => api.get("/sizes");
-export const deleteSizes = (id) => api.delete(`/sizes/${id}`);
+/* refeito */ export const createSize = (restaurant, data) => api.post(`/sizes/${restaurant}`, data);
+/* refeito */ export const updateSize = (restaurant, data) => api.put(`/sizes/${restaurant}`, data);
+/* refeito */ export const getSizes = (restaurant) => api.get(`/sizes/${restaurant}`);
+/* refeito */ export const deleteSizes = (restaurant, id) => api.delete(`/sizes/${restaurant}/${id}`);
 
 //-----------------------------------------------------------------------------------
 export const getJWT = (data) => api.post("/auth", data, {
