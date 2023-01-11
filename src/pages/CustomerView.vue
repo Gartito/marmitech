@@ -118,7 +118,7 @@ export default {
             this.dia = response.data[0].day;
         },
         async getAllDrinks() {
-            const response = await getDrinks();
+            const response = await getDrinks(this.restaurant);
             this.bebidas = response.data;
             for (var bebida of this.bebidas) {
                 bebida.value = parseInt(bebida.value)
@@ -126,7 +126,7 @@ export default {
             this.bebidas.sort((a, b) => a.value - b.value);
         },
         async getAllSizes() {
-            const response = await getSizes();
+            const response = await getSizes(this.restaurant);
             this.tamanhos = response.data;
             for (var tamanho of this.tamanhos) {
                 tamanho.value = parseInt(tamanho.value)
