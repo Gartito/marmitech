@@ -3,8 +3,6 @@
 marmitech.net
 ```
 
-A Quasar Project
-
 ## Install the dependencies
 
 ```bash
