@@ -4,10 +4,10 @@ Um editor de cardápio online para restaurantes com alta demanda de marmitas pel
 Para ver o projeto em produção:
 
 Para acessar a home:
-marmitech.net
+__marmitech.net__
 
 Para acessar o menu montado do dia:
-marmitech.net/menu
+__marmitech.net/menu__
 
 ## Install the dependencies
 
