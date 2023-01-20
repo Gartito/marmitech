@@ -35,13 +35,14 @@ export default {
   },
   setup() {
     return {
-      model: ref("cardapio"),
+      model: ref("sair"),
 
       options: [
         { label: "Cardápio", value: "cardapio", href: "/" },
+        { label: "Clientes", value: "clientes", href: "/customers" },
         { label: "Sair", value: "sair", href: "/logout" },
       ],
-    };
+    }
   },
   methods: {
     checkWindowSize() {
