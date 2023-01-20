@@ -1,6 +1,13 @@
 # Marmitech App (marmitech)
 
-A Quasar Project
+Um editor de cardápio online para restaurantes com alta demanda de marmitas pelo WhatsApp.
+Para ver o projeto em produção:
+
+Para acessar a home:
+marmitech.net
+
+Para acessar o menu montado do dia:
+marmitech.net/menu
 
 ## Install the dependencies
 
