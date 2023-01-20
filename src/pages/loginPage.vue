@@ -78,6 +78,9 @@
             </q-card-actions>
         </q-card>
     </q-dialog>
+    Acesse com esse usuário:
+    livorno
+    livorno2023sergio
 </template>
 
 <script>
