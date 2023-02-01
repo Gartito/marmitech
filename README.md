@@ -1,13 +1,17 @@
 # Marmitech App (marmitech)
 
-Um editor de cardápio online para restaurantes com alta demanda de marmitas pelo WhatsApp.
-Para ver o projeto em produção:
+An online menu editor for restaurants with high demand for meals via WhatsApp.
+To view the live project:
 
-Para acessar a home:
+To access the home:
 __marmitech.net__
 
-Para acessar o menu montado do dia:
+To access the daily assembled menu:
 __marmitech.net/menu__
+
+System diagram:
+
+![Logo do meu projeto](/images/system_diagram.png)
 
 ## Install the dependencies
 
