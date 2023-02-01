@@ -42,6 +42,9 @@
             <q-btn color="secondary" label="ENTRAR" class="text-h6 q-mr-lg" @click="login" />
         </q-card-section>
     </q-card>
+    Acesse com esse usuário:<br>
+    <strong>user:</strong> livorno <br>
+    <strong>password:</strong> livorno2023sergio
 
     <!-- CAIXAS DE DIÁLOGO -->
     <q-dialog v-model="showDialog" title="Esqueci minha Senha">
