@@ -42,9 +42,9 @@
             <q-btn color="secondary" label="ENTRAR" class="text-h6 q-mr-lg" @click="login" />
         </q-card-section>
     </q-card>
-    Acesse com esse usuário:
-    livorno
-    livorno2023sergio
+    Acesse com esse usuário:<br>
+    <strong>user:</strong> livorno <br>
+    <strong>password:</strong> livorno2023sergio
 
 
     <!-- CAIXAS DE DIÁLOGO -->
@@ -115,7 +115,7 @@ export default {
             try {
                 const response = await getJWT(data);
                 this.token = response.data;
-                localStorage.setItem('jwt_token_marmitech_session', this.token);
+                localStorage.setItem(process.env.SECRET_KEY_TOKEN, this.token);
                 this.$router.replace('/');
             } catch (e) {
                 console.log(e)
