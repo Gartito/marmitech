@@ -39,7 +39,7 @@ export default {
 
       options: [
         { label: "Cardápio", value: "cardapio", href: "/" },
-        { label: "Clientes", value: "clientes", href: "/customers" },
+        //{ label: "Clientes", value: "clientes", href: "/customers" },
         { label: "Sair", value: "sair", href: "/logout" },
       ],
     }
