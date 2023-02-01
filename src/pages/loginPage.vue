@@ -111,7 +111,7 @@ export default {
             try {
                 const response = await getJWT(data);
                 this.token = response.data;
-                localStorage.setItem('jwt_token_marmitech_session', this.token);
+                localStorage.setItem(process.env.SECRET_KEY_TOKEN, this.token);
                 this.$router.replace('/');
             } catch (e) {
                 console.log(e)

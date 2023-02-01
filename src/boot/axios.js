@@ -8,7 +8,7 @@ import axios from "axios";
 // "export default () => {}" function below (which runs individually
 // for each client)
 const api = axios.create({
-  baseURL: "https://cox1gk7s85.execute-api.us-east-1.amazonaws.com/dev",
+  baseURL: process.env.API_URL,
 });
 
 export default boot(({ app }) => {

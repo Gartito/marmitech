@@ -62,7 +62,10 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      env: {
+        API_URL: "https://cox1gk7s85.execute-api.us-east-1.amazonaws.com/dev",
+        SECRET_KEY_TOKEN: "jwt_token_marmitech_session"
+      },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
