@@ -42,6 +42,9 @@
             <q-btn color="secondary" label="ENTRAR" class="text-h6 q-mr-lg" @click="login" />
         </q-card-section>
     </q-card>
+    Acesse com esse usuário:
+    livorno
+    livorno2023sergio
 
 
     <!-- CAIXAS DE DIÁLOGO -->
@@ -78,9 +81,6 @@
             </q-card-actions>
         </q-card>
     </q-dialog>
-    Acesse com esse usuário:
-    livorno
-    livorno2023sergio
 </template>
 
 <script>
